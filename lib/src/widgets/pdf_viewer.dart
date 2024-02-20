@@ -565,9 +565,13 @@ class _PdfViewerState extends State<PdfViewer>
     } else {
       z = _coverScale!;
     }
-    while (z < PdfViewerController.maxZoom) {
-      _zoomStops.add(z);
-      z *= 2;
+    if(z == 0) {
+      _zoomStops.add(1.0);
+    } else {
+      while (PdfViewerController.maxZoom) {
+        _zoomStops.add(z);
+        z *= 2;
+      }
     }
   }
 
