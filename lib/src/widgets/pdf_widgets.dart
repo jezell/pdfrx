@@ -222,6 +222,7 @@ class _PdfPageViewState extends State<PdfPageView> {
   void dispose() {
     _cancellationToken?.cancel();
     super.dispose();
+    _image?.dispose();
   }
 
   Widget _defaultDecorationBuilder(
@@ -318,6 +319,8 @@ class _PdfPageViewState extends State<PdfPageView> {
     );
     if (pageImage == null) return;
     final newImage = await pageImage.createImage();
+    _image?.dispose();
+    _image = null;
     pageImage.dispose();
     if (mounted) {
       setState(() {
