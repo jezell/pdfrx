@@ -552,7 +552,7 @@ class PdfPagePdfium extends PdfPage {
           return await (await backgroundWorker).compute(
             (params) {
               final cancelFlag = Pointer<Bool>.fromAddress(params.cancelFlag);
-	      if (cancelFlag.value || document.isDisposed) return false;
+              if (cancelFlag.value) return false;
               final bmp = pdfium.FPDFBitmap_CreateEx(
                 params.width,
                 params.height,
